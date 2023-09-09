@@ -154,12 +154,11 @@ def main(**kwargs):
         )
         if fsdp_config.fsdp_activation_checkpointing:
             apply_fsdp_checkpointing(model)
-    elif not train_config.quantization and not train_config.enable_fsdp:
+    elif not train_config.quantization:
         model.to("cuda")
 
     dataset_config = generate_dataset_config(train_config, kwargs)
 
-     # Load and preprocess the dataset for training and validation
     dataset_train = get_preprocessed_dataset(
         tokenizer,
         dataset_config,
